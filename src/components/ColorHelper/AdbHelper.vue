@@ -108,13 +108,13 @@ onUnmounted(() => {
     <div v-if="shown">
         <el-form :inline="true">
             <el-form>
-                <el-button @click="screencap" :disabled="loadingScreenCap" type="primary" style="margin-left: 20px;">
+                <el-button @click="screencap" :disabled="loadingScreenCap || !deviceId" type="primary" style="margin-left: 20px;">
                     <el-icon v-if="loadingScreenCap" class="is-loading">
                         <Loading />
                     </el-icon>
                     <template v-if="!loadingScreenCap">截图</template>
                 </el-button>
-                <el-select v-model="deviceIdMode" placeholder="模式" style="width:130px; margin-left: 10px" @change="deviceId = null">
+                <el-select v-model="deviceIdMode" placeholder="选择连接模式" style="width:130px; margin-left: 10px" @change="refreshDevices">
                     <el-option label="MuMu模拟器" value="mumu" />
                     <el-option label="ADB连接" value="adb" />
                 </el-select>
