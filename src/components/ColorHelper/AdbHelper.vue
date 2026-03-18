@@ -86,9 +86,9 @@ const refreshDevices = async (visible: boolean) => {
     }
     loadingDevices.value = false;
 }
-const localBridge = async () => {
-    window.location.href = "colorhelperbridge://open?param=123";
-}
+// const localBridge = async () => {
+//     window.location.href = "colorhelperbridge://open?param=123";
+// }
 onMounted(async () => {
     callbackId = adbHelper.setCallback(function () {
         shown.value = true;
@@ -146,13 +146,14 @@ onUnmounted(() => {
             </el-form>
         </el-form>
     </div>
-    <div v-if="!shown">
+    <!-- 暂时屏蔽通过 url scheme的方式启动运行桥程序，待桥程序成熟发布后再考虑使用何种方式实现启动交互 -->
+    <!-- <div v-if="!shown">
         <el-button @click="localBridge" type="success" style="margin-left: 20px;">
             <el-icon v-if="loadingScreenCap" class="is-loading">
                 <Loading />
             </el-icon>
             <template v-if="!loadingScreenCap">启用 ADB 连接（需本地桥应用）</template>
         </el-button>
-    </div>
+    </div> -->
 </template>
 <style></style>
