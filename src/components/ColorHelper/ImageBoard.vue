@@ -1106,7 +1106,7 @@ const copyExportText = () => {
                                 <el-tooltip placement="bottom" effect="light">
                                     <template #content>
                                         <div style="width: 200px">
-                                            <el-text size="nomal">
+                                            <el-text size="default">
                                                 选择一个或多个图片，与当前图片叠加，新图与原图逐像素对比，颜色相似（配置的相似度）则保留原来图片的颜色，否则清除该处颜色（使其透明）
                                             </el-text>
                                         </div>
@@ -1117,10 +1117,17 @@ const copyExportText = () => {
                                 </el-tooltip>
                             </el-button>
                         </el-upload>
-                        <el-button size="nomal" @click="superpositionUndo"
+                        <el-button @click="superpositionAdbScreencap" size="default" v-if="canAdbScreencap"
+                            style="width: 48px" :disabled="loadingScreenCap">
+                            <el-icon v-if="loadingScreenCap" class="is-loading">
+                                <Loading />
+                            </el-icon>
+                            <template v-if="!loadingScreenCap">截图</template>
+                        </el-button>
+                        <el-button size="default" @click="superpositionUndo"
                             :disabled="!(superpositionImageStackCurrentIndex >= 1)"><span class="iconfont icon-chexiao"
                                 style="font-size: 12px;"></span></el-button>
-                        <el-button size="nomal" @click="superpositionRedo"
+                        <el-button size="default" @click="superpositionRedo"
                             :disabled="!(superpositionImageStackCurrentIndex !== superpositionImageStack.length)"><span
                                 class="iconfont icon-zhongzuo" style="font-size: 12px;"></span></el-button>
                         <el-button style="width: 64.6px" @click="resetImageBtnEvent">重置</el-button>
@@ -1143,7 +1150,7 @@ const copyExportText = () => {
                                         <el-button type="primary" style="margin-top: 10px;" @click="copyExportText">
                                             复制文本
                                         </el-button>
-                                        <el-button @click="exportPositionDataPopVisible = false" size="nomal"
+                                        <el-button @click="exportPositionDataPopVisible = false" size="default"
                                             type="primary" style="margin-top: 10px;" link>关闭</el-button>
                                     </div>
                                 </div>
@@ -1159,9 +1166,9 @@ const copyExportText = () => {
                                     <el-input v-model="importPositionDataText" style="width: 100%" type="textarea"
                                         :rows="8" placeholder="请输入数据后点击确定 或 点击确定自动识别粘贴板" />
                                     <div style="text-align: right;">
-                                        <el-button @click=closeImportPositionData size="nomal" type="primary"
+                                        <el-button @click=closeImportPositionData size="default" type="primary"
                                             style="margin-top: 10px;" link>关闭</el-button>
-                                        <el-button @click="importPositionDataEvent" size="nomal" type="primary"
+                                        <el-button @click="importPositionDataEvent" size="default" type="primary"
                                             style="margin-top: 10px;">确定</el-button>
                                     </div>
                                 </div>
